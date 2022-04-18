@@ -5,18 +5,66 @@
 #include <algorithm>
 #include <ctime>
 #include <vector>
+#include <ctime>
 #include "Header.h"
 using namespace std;
+
+
+/*void SortRecursive(vector<int>& v, int n) {
+    int temp = 0;
+    if (n == 1) { goto Check1; }
+    for (int i = 0; i <= n - 1; i++) {
+        if (v[i] > v[i + 1]) {
+
+        }
+        SortRecursive(v, n - 1);
+    }
+Check1:
+    return;
+}*/
+
+void SortRecursive(vector<int>& v, int n)
+{
+    if (n <= 1) { goto Check1; } //used safely
+    for (int i = 0; i < n - 1; i++) {
+        if (v[i] > v[i + 1]) {
+            swap(v[i], v[i + 1]);
+        }
+    }
+    SortRecursive(v, n - 1);
+Check1:
+    return;
+}
 
 
 int main()
 {
     //RandomVector(vector<int>& v, int size) // size //100//1000//5000//10000//50000
     vector<int> v;
+    int size = 1000;
     int count = 0;
-    RandomVector(v, 50000);
+    RandomVector(v, size); //no need to controll stack
 
+    SortRecursive(v, size);
+
+
+    for (int i = 0; i < size; i++) {
+        cout << v[i] << endl;
+        count++;
+        cout << count << endl;
+    }
 }
+
+
+/*void RemoveEinV(vector<int>& v, int pos) //remove element
+{
+    v.erase(v.begin() + pos);
+}
+
+void AddEinV(vector<int>& v, int pos) //add element(copy basically)
+{
+    v.push_back(v[pos]);
+}*/
 
 /*    for (int i = 0; i < 50000; i++) {
         cout << v[i] << endl;
